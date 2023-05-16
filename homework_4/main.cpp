@@ -3,7 +3,7 @@ using namespace std;
 
 #include "ScheduleFCFS.h"
 #include "ScheduleSMDF.h"
-//#include "ScheduleSCAN.h"
+#include "ScheduleSCAN.h"
 
 int main() {
 	int current = 10;
@@ -24,8 +24,8 @@ int main() {
 	ScheduleSMDF smdf("SMDF", floor, current);
 	smdf.run();
 
-	//// SCAN. 이동 방향에서 가장 가까운 층으로 이동. 끝까지 가면 방향 전환
-	//// 시작은 현재 엘리베이터가 있는 위치에서 위쪽 방향
-	//ScheduleSCAN scan("SCAN", floor, current);
-	//scan.run();
+	// SCAN. 이동 방향에서 가장 가까운 층으로 이동. 끝까지 가면 방향 전환
+	// 시작은 현재 엘리베이터가 있는 위치에서 위쪽 방향
+	ScheduleSCAN scan("SCAN", floor, current);
+	scan.run();
 }
