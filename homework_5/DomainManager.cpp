@@ -1,19 +1,16 @@
 #include "DomainManager.h"
 
-DomainManager::DomainManager() { // 생성자
-	cout << "***** 도메인 관리 프로그램 SiteMan을 시작합니다." << endl;
+DomainManager::DomainManager() { // 생성자cout << "***** 도메인 관리 프로그램 SiteMan을 시작합니다." << endl;
 }
-
 DomainManager::~DomainManager() { // 소멸자
 	cout << "프로그램 종료..." << endl;
 }
-
 void DomainManager::getMenu() { // 메뉴를 입력
 	cin >> menu;
 }
-
 void DomainManager::run() { // 실행
 	bool flag = true; // 종료 여부를 판단하는 변수
+	int i;
 	string site_name; // 사용자가 입력하는 사이트 이름
 	string url; // 사용자가 입력하는 사이트 url
 	while (true) {
@@ -31,7 +28,7 @@ void DomainManager::run() { // 실행
 				else {
 					cout << "url>>";
 					cin >> url;
-					dic.insert(make_pair(site_name, url)); // 사이트이름은 키, url은 값으로 쌍을 만들어 저장함
+					vect.push_back(pair<string, string>(site_name, url)); // 사이트이름과 url을 쌍으로 벡터에 저장
 				}
 			}
 			break;
@@ -42,10 +39,14 @@ void DomainManager::run() { // 실행
 				if (site_name == "뒤로") // 사이트이름이 "뒤로"인 경우 조회 종료
 					break;
 				else {
-					if (dic.find(site_name) == dic.end()) // 맵에 입력한 사이트이름이 없는 경우
+					for (i = 0; i < vect.size(); i++) {
+						if (vect[i].first == site_name) {
+							cout << vect[i].first << "의 url은 " << vect[i].second << endl; // 이름-url 순으로 vector에서 가져와 출력
+							break;
+						}
+					}
+					if (i == vect.size()) // vector를 전부 돌았음에도 찾지 못한 경우
 						cout << site_name << "은 없는 사이트입니다." << endl;
-					else // 사이트이름과 url을 맵에서 가져와 출력한다
-						cout << site_name << "의 url은 " << dic[site_name] << endl;
 				}
 			}
 			break;
